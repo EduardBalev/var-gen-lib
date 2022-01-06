@@ -4,7 +4,7 @@
   "description": "Variables generator",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "ts-node ./src/index.ts",
     "build": "tsc",
     "version": "auto-changelog -p && git add CHANGELOG.md"
   },
