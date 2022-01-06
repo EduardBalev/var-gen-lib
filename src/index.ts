@@ -1,3 +1,5 @@
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
 import { CreateFile } from './controllers/create-file.controller';
 import { ParseController } from './controllers/parse.controller';
 import { ConvertToCss } from './controllers/convertors/convert-to-css';
@@ -18,6 +20,18 @@ const VARS = {
 
 const creator = new CreateFile();
 
-creator.writeFile('./result/colors.css', ParseController.parse(VARS, new ConvertToCss())).then((result) => {
+const argv = yargs(hideBin(process.argv)).argv as {
+  [x: string]: unknown;
+  _: (string | number)[];
+  $0: string;
+};
+
+let path = argv._[0] ? `${argv._[0]}` : './result/colors.css';
+
+if (path.split('/').length === 1) {
+  path = `./${path}`;
+}
+
+creator.writeFile(path, ParseController.parse(VARS, new ConvertToCss())).then((result) => {
   console.log(result);
 });
