@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/EduardBalev/var-gen-lib#readme",
   "devDependencies": {
+    "@types/node": "^17.0.8",
     "auto-changelog": "^2.3.0",
     "fs": "0.0.1-security",
     "nodemon": "^2.0.15",
