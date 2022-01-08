@@ -1,8 +1,7 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { CreateFile } from './controllers/create-file.controller';
-import { ParseController } from './controllers/parse.controller';
 import { ConvertToCss } from './controllers/convertors/convert-to-css';
+import { FileEntity } from './domains/entities/file.entity';
 
 const VARS = {
   test: `'TEST variable'`,
@@ -18,20 +17,19 @@ const VARS = {
   },
 };
 
-const creator = new CreateFile();
-
 const argv = yargs(hideBin(process.argv)).argv as {
   [x: string]: unknown;
   _: (string | number)[];
   $0: string;
 };
 
-let path = argv._[0] ? `${argv._[0]}` : './result/colors.css';
-
-if (path.split('/').length === 1) {
-  path = `./${path}`;
+let pathToFile = argv._[0] ? `${argv._[0]}` : './result/colors.css';
+if (pathToFile.split('/').length === 1) {
+  pathToFile = `./${pathToFile}`;
 }
 
-creator.writeFile(path, ParseController.parse(VARS, new ConvertToCss())).then((result) => {
-  console.log(result);
+const { path, name, extention } = FileEntity.destructurePath(pathToFile);
+const creator = new FileEntity(path, name, extention, FileEntity.parse(VARS, new ConvertToCss()));
+creator.write().then((result) => {
+  console.log(`File ${name}.${extention} to be generated successfully!`);
 });

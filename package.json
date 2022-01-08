@@ -2,11 +2,11 @@
   "name": "var-gen-lib",
   "version": "0.0.1",
   "description": "Variables generator",
-  "main": "index.ts",
+  "main": "./src/main.ts",
   "scripts": {
-    "start": "ts-node ./src/index.ts",
-    "generate-demo": "ts-node ./src/index.ts",
-    "generate-demo:with-name": "ts-node ./src/index.ts result/colors-withName.css",
+    "start": "ts-node ./src/main.ts",
+    "generate-demo": "ts-node ./src/main.ts",
+    "generate-demo:with-name": "ts-node ./src/main.ts result/colors-withName.css",
     "build": "tsc",
     "version": "auto-changelog -p && git add CHANGELOG.md"
   },
