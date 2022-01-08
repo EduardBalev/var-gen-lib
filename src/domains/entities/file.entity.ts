@@ -12,12 +12,6 @@ export class FileEntity {
     if (__content) this._content = __content;
   }
 
-  static async createNew(pathToFile: string, value: string) {
-    const { path, name, extension } = FileEntity.destructurePath(pathToFile);
-    const creator = new FileEntity(path, name, extension, value);
-    return await creator.write();
-  }
-
   static destructurePath(path: string): {
     path: string;
     name: string;

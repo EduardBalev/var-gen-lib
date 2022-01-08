@@ -1,9 +1,8 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { ConvertToCss } from './modules/convertors';
-import { FileEntity } from './domains/entities/file.entity';
 import { TokenMapEntity } from './domains/entities/token-map.entity';
-import { ParseCommand } from './domains/ports/out/parser.command';
+import { GenerateFileService } from './domains/services/parse.service';
+import { ConvertorsMap } from './modules/convertors/convertors.map';
 
 const VARS = new TokenMapEntity({
   test: `'TEST variable'`,
@@ -36,11 +35,13 @@ const argv = yargs(hideBin(process.argv)).argv as {
 };
 
 let pathToFile = argv._[0] ? `${argv._[0]}` : './result/colors.css';
+let mode = argv._[1] ? `${argv._[1]}` : null;
 if (pathToFile.split('/').length === 1) {
   pathToFile = `./${pathToFile}`;
 }
 
-// TODO: implement factory for auto get class for convert from file extension
-FileEntity.createNew(pathToFile, ParseCommand.parse(VARS, new ConvertToCss())).then((result) => {
+const genService = new GenerateFileService(ConvertorsMap);
+
+genService.generate(pathToFile, VARS, mode).then((result) => {
   console.log(`File ${result.path} to be generated successfully!`);
 });
