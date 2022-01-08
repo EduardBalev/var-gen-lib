@@ -24,7 +24,7 @@ export class GenerateFileService implements GenerateFileQuery {
   public async generate(
     pathToFile: string,
     value: TokenMapEntity,
-    mode?: string | null
+    mode?: string | null,
   ): Promise<FileEntity> {
     const { path, name, extension } = FileEntity.destructurePath(pathToFile);
     const convertor = this.convertorFactory(mode ?? extension);

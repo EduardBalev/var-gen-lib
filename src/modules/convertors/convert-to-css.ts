@@ -28,9 +28,13 @@ export class ConvertToCss extends ConvertorEntity {
     return result;
   }
 
-  private _parseLine(value: TokenMapEntity, _prefix: string | null = null, tabs = 0): string {
+  private _parseLine(
+    value: TokenMapEntity,
+    _prefix: string | null = null,
+    tabs = 0,
+  ): string {
     const entry = value.valueEntry;
-    let result: string = '';
+    let result = '';
     let tab = this.TAB;
 
     for (let i = 0; i === tabs; i++) {
@@ -42,19 +46,29 @@ export class ConvertToCss extends ConvertorEntity {
 
       if (typeof token === 'object') {
         result += this.NEW_LINE;
-        result += `${this.NEW_LINE}${tab}${this._addComment(`============================`)}`;
-        result += `${this.NEW_LINE}${tab}${this._addComment(`START ${key} ============`)}`;
+        result += `${this.NEW_LINE}${tab}${this._addComment(
+          `============================`,
+        )}`;
+        result += `${this.NEW_LINE}${tab}${this._addComment(
+          `START ${key} ============`,
+        )}`;
         result += this.NEW_LINE;
 
         result += this._parseLine(token, prefixedKey, tabs + 1);
 
-        result += `${this.NEW_LINE}${tab}${this._addComment(`END ${key} ============`)}`;
-        result += `${this.NEW_LINE}${tab}${this._addComment(`============================`)}`;
+        result += `${this.NEW_LINE}${tab}${this._addComment(
+          `END ${key} ============`,
+        )}`;
+        result += `${this.NEW_LINE}${tab}${this._addComment(
+          `============================`,
+        )}`;
       } else {
         index !== 0 && (result += this.NEW_LINE);
         result += tab;
         result +=
-          this.extension === 'sass' ? `--${prefixedKey}: ${token}` : `--${prefixedKey}: ${token};`;
+          this.extension === 'sass'
+            ? `--${prefixedKey}: ${token}`
+            : `--${prefixedKey}: ${token};`;
       }
     });
 

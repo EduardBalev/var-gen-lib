@@ -22,7 +22,9 @@ export class TokenMapEntity {
     }
   }
 
-  static entry(value: TokenMapEntity | TokenMapEntityEntryType): TokenMapEntityEntryType {
+  static entry(
+    value: TokenMapEntity | TokenMapEntityEntryType,
+  ): TokenMapEntityEntryType {
     return Array.isArray(value) ? value : Object.entries(value);
   }
 

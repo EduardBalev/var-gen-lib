@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { constants, existsSync, mkdirSync, promises } from 'fs';
 
 export class FileEntity {
   private _content: string | null = null;
@@ -7,7 +7,7 @@ export class FileEntity {
     private readonly _path: string | string[] | null,
     private readonly _fileName: string,
     private readonly _extension: string,
-    readonly __content: string
+    readonly __content: string,
   ) {
     if (__content) this._content = __content;
   }
@@ -36,8 +36,8 @@ export class FileEntity {
   static mkDir(path: string): void {
     if (!path) return;
 
-    if (!fs.existsSync(path)) {
-      fs.mkdirSync(path, { recursive: true });
+    if (!existsSync(path)) {
+      mkdirSync(path, { recursive: true });
     }
   }
 
@@ -65,10 +65,10 @@ export class FileEntity {
 
   public async create() {
     try {
-      await fs.promises.access(this.path, fs.constants.R_OK | fs.constants.W_OK);
+      await promises.access(this.path, constants.R_OK | constants.W_OK);
     } catch (err) {
       FileEntity.mkDir(this.dirPath);
-      await fs.promises.open(this.path, 'w', fs.constants.R_OK);
+      await promises.open(this.path, 'w', constants.R_OK);
     }
   }
 
@@ -84,10 +84,10 @@ export class FileEntity {
     return this;
   }
 
-  private async _write(content: string, replace: boolean = false) {
+  private async _write(content: string, replace = false) {
     try {
       this.create();
-      const writeFn = replace ? fs.promises.writeFile : fs.promises.appendFile;
+      const writeFn = replace ? promises.writeFile : promises.appendFile;
       await writeFn(this.path, content);
     } catch (error) {
       throw error;

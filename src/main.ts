@@ -1,7 +1,7 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { TokenMapEntity } from './domains/entities/token-map.entity';
-import { GenerateFileService } from './domains/services/parse.service';
+import { GenerateFileService } from './domains/services/generate-file.service';
 import { ConvertorsMap } from './modules/convertors/convertors.map';
 
 const VARS = new TokenMapEntity({
@@ -35,7 +35,7 @@ const argv = yargs(hideBin(process.argv)).argv as {
 };
 
 let pathToFile = argv._[0] ? `${argv._[0]}` : './result/colors.css';
-let mode = argv._[1] ? `${argv._[1]}` : null;
+const mode = argv._[1] ? `${argv._[1]}` : null;
 if (pathToFile.split('/').length === 1) {
   pathToFile = `./${pathToFile}`;
 }
