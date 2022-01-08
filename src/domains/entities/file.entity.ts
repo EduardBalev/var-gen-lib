@@ -1,7 +1,4 @@
 import fs from 'fs';
-import { Convertor } from '../../controllers/convertor.abstract';
-import { ConvertorEntity } from './convertor.entity';
-import { TokenMapEntity, TokenMapInputType } from './token-map.entity';
 
 export class FileEntity {
   private _content: string | null = null;
@@ -9,18 +6,22 @@ export class FileEntity {
   constructor(
     private readonly _path: string | string[] | null,
     private readonly _fileName: string,
-    private readonly _extention: string,
+    private readonly _extension: string,
     readonly __content: string
   ) {
     if (__content) this._content = __content;
   }
 
-  static async createNew(pathToFile: string, value: TokenMapEntity) {}
+  static async createNew(pathToFile: string, value: string) {
+    const { path, name, extension } = FileEntity.destructurePath(pathToFile);
+    const creator = new FileEntity(path, name, extension, value);
+    return await creator.write();
+  }
 
   static destructurePath(path: string): {
     path: string;
     name: string;
-    extention: string;
+    extension: string;
   } {
     const splitLast = (_arr: string[]): [string[], string] => {
       const arr = _arr.slice(0, _arr.length - 1);
@@ -29,17 +30,13 @@ export class FileEntity {
     };
     const pathSequence: string[] = Array.isArray(path) ? path : path.split('/');
     const [dirSequence, file] = splitLast(pathSequence);
-    const [nameSequence, extention] = splitLast(file?.split('.'));
+    const [nameSequence, extension] = splitLast(file?.split('.'));
 
     return {
       path: dirSequence.join('/'),
       name: nameSequence.join('.'),
-      extention,
+      extension,
     };
-  }
-
-  static parse(value: TokenMapInputType, convertor: ConvertorEntity): string {
-    return convertor.convert(value);
   }
 
   static mkDir(path: string): void {
@@ -51,7 +48,7 @@ export class FileEntity {
   }
 
   public get path(): string {
-    return `${this.dirPath}/${this._fileName}.${this._extention}`;
+    return `${this.dirPath}/${this._fileName}.${this._extension}`;
   }
 
   public get dirPath(): string {

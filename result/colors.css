@@ -4,11 +4,11 @@ html {
   --test: 'TEST variable';
 
   /* ============================ */
-  /* START colors ============ */
+  /* START color ============ */
   --color-black: #000000;
   --color-white: #ffffff;
   --color-grey: #cccccc;
-  /* END colors ============ */
+  /* END color ============ */
   /* ============================ */
 
   /* ============================ */
@@ -17,5 +17,12 @@ html {
   --bg-color-white: hsla(0, 0%, 100%, 0.15);
   --bg-color-grey: hsla(0, 0%, 80%, 0.15);
   /* END bg-color ============ */
+  /* ============================ */
+  --alala: 22;
+
+  /* ============================ */
+  /* START alalaBlock ============ */
+  --alalaBlock-test: 120px;
+  /* END alalaBlock ============ */
   /* ============================ */
 }

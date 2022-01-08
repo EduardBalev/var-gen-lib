@@ -1,7 +1,6 @@
-import { TokenMapEntity } from '../../entities/token-map.entity';
-import { TokenValueType } from '../../entities/token.entity';
+import { TokenMapEntity, TokenMatItemType } from '../../entities/token-map.entity';
 
-export type ConvertorInputEntry = [string, TokenValueType][];
+export type ConvertorInputEntry = [string, TokenMatItemType][];
 
 export interface Convertor {
   convert(obj: TokenMapEntity): string;
