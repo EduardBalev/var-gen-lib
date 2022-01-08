@@ -24,12 +24,12 @@ export class FileEntity {
     };
     const pathSequence: string[] = Array.isArray(path) ? path : path.split('/');
     const [dirSequence, file] = splitLast(pathSequence);
-    const [nameSequence, extension] = splitLast(file?.split('.'));
+    const [nameSequence, _extension] = splitLast(file?.split('.'));
 
     return {
       path: dirSequence.join('/'),
-      name: nameSequence.join('.'),
-      extension,
+      name: nameSequence.length > 0 ? nameSequence.join('.') : _extension,
+      extension: nameSequence.length > 0 ? _extension : '',
     };
   }
 

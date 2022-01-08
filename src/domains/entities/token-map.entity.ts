@@ -14,30 +14,14 @@ export type TokenMapEntityEntryType = [string, TokenMatItemType][];
 export class TokenMapEntity {
   private _map = new Map<string, TokenMatItemType>();
 
-  public readonly isMap = true;
-
   constructor(_value?: TokenPrimitiveMapType) {
     if (_value) {
       this.add(_value);
     }
   }
 
-  static entry(
-    value: TokenMapEntity | TokenMapEntityEntryType,
-  ): TokenMapEntityEntryType {
-    return Array.isArray(value) ? value : Object.entries(value);
-  }
-
-  static fromEntry(value: TokenMapEntityEntryType): TokenMapType {
-    return Object.fromEntries(value);
-  }
-
-  public get value() {
-    return TokenMapEntity.fromEntry(this.valueEntry);
-  }
-
-  public get valueEntry() {
-    return [...this._map.entries()];
+  public get map() {
+    return this._map;
   }
 
   public add(value: TokenPrimitiveMapType) {

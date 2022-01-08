@@ -1,8 +1,8 @@
-import { ConvertorEntity } from '../../domains/entities/convertor.entity';
-import { TokenMapEntity } from '../../domains/entities/token-map.entity';
+import { ConvertorEntity } from '../../entities/convertor.entity';
+import { TokenMapEntity } from '../../entities/token-map.entity';
 
 // TODO: refactor this convertor;
-export class ConvertToCss extends ConvertorEntity {
+export class CssConvertor extends ConvertorEntity {
   private readonly ROOT_ELEMENT = 'html';
   private readonly NEW_LINE = '\n';
   private readonly TAB = '  ';
@@ -33,7 +33,7 @@ export class ConvertToCss extends ConvertorEntity {
     _prefix: string | null = null,
     tabs = 0,
   ): string {
-    const entry = value.valueEntry;
+    const entry = [...value.map.entries()];
     let result = '';
     let tab = this.TAB;
 

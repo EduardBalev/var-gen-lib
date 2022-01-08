@@ -2,7 +2,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { TokenMapEntity } from './domains/entities/token-map.entity';
 import { GenerateFileService } from './domains/services/generate-file.service';
-import { ConvertorsMap } from './modules/convertors/convertors.map';
+import { ConvertorsMap } from './domains/convertors/convertors.map';
 
 const VARS = new TokenMapEntity({
   test: `'TEST variable'`,
