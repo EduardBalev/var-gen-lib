@@ -33,12 +33,11 @@ export class FileEntity {
     };
   }
 
-  static mkDir(path: string): void {
-    if (!path) return;
-
+  static async mkDir(path: string) {
     if (!existsSync(path)) {
-      mkdirSync(path, { recursive: true });
+      await promises.mkdir(path, { recursive: true });
     }
+    return Promise.resolve();
   }
 
   public get path(): string {
@@ -64,17 +63,13 @@ export class FileEntity {
   }
 
   public async create() {
-    try {
-      await promises.access(this.path, constants.R_OK | constants.W_OK);
-    } catch (err) {
-      FileEntity.mkDir(this.dirPath);
-      await promises.open(this.path, 'w', constants.R_OK);
-    }
+    return promises
+      .access(this.path, constants.R_OK | constants.W_OK)
+      .catch(() => FileEntity.mkDir(this.dirPath));
   }
 
   public async write(): Promise<FileEntity> {
-    await this._write(this.content ?? '', true);
-    return this;
+    return this._write(this.content ?? '', true).then(() => this);
   }
 
   public async append(content: string): Promise<FileEntity> {
@@ -85,12 +80,13 @@ export class FileEntity {
   }
 
   private async _write(content: string, replace = false) {
-    try {
-      this.create();
-      const writeFn = replace ? promises.writeFile : promises.appendFile;
-      await writeFn(this.path, content);
-    } catch (error) {
-      throw error;
-    }
+    return this.create()
+      .then(() => {
+        const writeFn = replace ? promises.writeFile : promises.appendFile;
+        return writeFn(this.path, content);
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
 }

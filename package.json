@@ -4,9 +4,9 @@
   "description": "Variables generator",
   "main": "./src/main.ts",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "start": "ts-node ./src/main.ts",
-    "start-demo:with-name": "ts-node ./src/main.ts result/colors-withName.css",
+    "prebuild": "rimraf dist && rimraf result",
+    "start": "ts-node ./src/demo.ts",
+    "start-demo:with-name": "ts-node ./src/demo.ts result/colors-withName.css",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
