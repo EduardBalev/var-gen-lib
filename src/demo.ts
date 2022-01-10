@@ -1,8 +1,8 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { ConvertorsMap, GenerateFileService, TokenMapEntity } from './main';
+import { BuildService, TokenPrimitiveMapType } from './main';
 
-const VARS = new TokenMapEntity({
+const VARS: TokenPrimitiveMapType = {
   test: `'TEST variable'`,
   color: {
     black: '#000000',
@@ -14,17 +14,7 @@ const VARS = new TokenMapEntity({
     white: 'hsla(0, 0%, 100%, 0.15)',
     grey: 'hsla(0, 0%, 80%, 0.15)',
   },
-});
-
-VARS.add({
-  alala: 22,
-});
-
-VARS.add({
-  alalaBlock: {
-    test: '120px',
-  },
-});
+};
 
 const argv = yargs(hideBin(process.argv)).argv as {
   [x: string]: unknown;
@@ -38,12 +28,10 @@ if (pathToFile.split('/').length === 1) {
   pathToFile = `./${pathToFile}`;
 }
 
-const genService = new GenerateFileService(ConvertorsMap);
-
-genService
+new BuildService()
   .generate(pathToFile, VARS, mode)
   .then((result) => {
-    console.log(`File ${result.path} to be generated successfully!`);
+    console.log(`File ${result.fullPath} to be generated successfully!`);
   })
   .catch((err) => {
     console.log(`File do not be generated!`, err);

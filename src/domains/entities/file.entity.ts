@@ -1,4 +1,4 @@
-import { constants, existsSync, mkdirSync, promises } from 'fs';
+import { constants, existsSync, promises } from 'fs';
 
 export class FileEntity {
   private _content: string | null = null;

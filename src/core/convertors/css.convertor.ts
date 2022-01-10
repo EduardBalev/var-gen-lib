@@ -1,15 +1,13 @@
-import { ConvertorEntity } from '../../entities/convertor.entity';
-import { TokenMapEntity } from '../../entities/token-map.entity';
+import { TokenMapEntity } from '../../domains/entities/token-map.entity';
+import { ConvertCommand } from '../../domains/ports/in/convert.command';
 
 // TODO: refactor this convertor;
-export class CssConvertor extends ConvertorEntity {
+export class CssConvertorCommand implements ConvertCommand {
   private readonly ROOT_ELEMENT = 'html';
   private readonly NEW_LINE = '\n';
   private readonly TAB = '  ';
 
-  constructor(private readonly _extension: 'css' | 'scss' | 'sass' = 'css') {
-    super();
-  }
+  constructor(private readonly _extension: 'css' | 'scss' | 'sass' = 'css') {}
 
   public get extension() {
     return this._extension;

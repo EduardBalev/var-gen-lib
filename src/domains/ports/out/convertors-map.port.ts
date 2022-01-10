@@ -1,3 +1,5 @@
 import { ConvertorEntity } from '../../entities/convertor.entity';
 
-export type ConvertorsMapPort = Map<string, ConvertorEntity>;
+export interface ConvertorsMapPort {
+  get(extension: string): ConvertorEntity | null;
+}

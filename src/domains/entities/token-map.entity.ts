@@ -16,7 +16,7 @@ export class TokenMapEntity {
 
   constructor(_value?: TokenPrimitiveMapType) {
     if (_value) {
-      this.add(_value);
+      this.fromObj(_value);
     }
   }
 
@@ -24,7 +24,7 @@ export class TokenMapEntity {
     return this._map;
   }
 
-  public add(value: TokenPrimitiveMapType) {
+  public fromObj(value: TokenPrimitiveMapType) {
     const entry = Object.entries(value);
     entry.forEach(([k, _v]) => {
       let v: TokenMatItemType;

@@ -1,7 +1,7 @@
 import { TokenMapEntity } from '../token-map.entity';
 
 describe('TokenMapEntity', () => {
-  describe('add()', () => {
+  describe('fromObj()', () => {
     it('flat value', () => {
       const entity = new TokenMapEntity();
       const input = {
@@ -9,7 +9,7 @@ describe('TokenMapEntity', () => {
         colorText: 'hsl(0, 0%, 0%)',
         fontFamily: `'Custom Font Name', Helvetica, sans-serif`,
       };
-      entity.add(input);
+      entity.fromObj(input);
       expect(entity.map).toEqual(new Map(Object.entries(input)));
     });
 
@@ -23,7 +23,7 @@ describe('TokenMapEntity', () => {
           deeperProp: 'any',
         },
       };
-      entity.add(input);
+      entity.fromObj(input);
       const expected: any = new Map(Object.entries(input));
       expected.set('deep', new TokenMapEntity(input.deep));
       expect(entity.map).toEqual(expected);
