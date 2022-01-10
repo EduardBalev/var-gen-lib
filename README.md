@@ -2,9 +2,10 @@
 
 ## Variable generator for CSS
 
-Use hexagonal architecture pattern
+This library is designed to ease the lot of interface designers. You can generate a style file with CSS Custom Properties or SASS variables (in the future) for your design system.
 
-### TODOs:
+### My TODOs:
 
-- Add command generator API
+- Write more tests
+- Refactor css-convertor
 - ... more convert types (like .scss .sass atc)
