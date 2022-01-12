@@ -1,4 +1,4 @@
-import { ConvertCommand } from '../ports/in/convert.command';
+import { ConvertStrategy } from '../ports/in/convert.strategy';
 import { GenerateFileCommand } from '../ports/in/generate-file.command';
 import { GenerateFileUseCase } from '../ports/in/generate-file.use-case';
 import { SuccessCreateFilePort } from '../ports/out/success-create-file.port';
@@ -25,7 +25,7 @@ export class GenerateFileService implements GenerateFileUseCase {
     }));
   }
 
-  private _parse(value: TokenMapEntity, convertor: ConvertCommand): string {
+  private _parse(value: TokenMapEntity, convertor: ConvertStrategy): string {
     return convertor.convert(value);
   }
 

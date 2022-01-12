@@ -1,1 +1,1 @@
-export * from './css.convertor';
+export * from './css-convertor.strategy';

@@ -1,10 +1,10 @@
 import { TokenPrimitiveMapType } from '../../../domains/entities/token-map.entity';
-import { SuccessCreateFilePort } from '../../../domains/ports/out/success-create-file.port';
+import { BuildSuccessPort } from '../out/build-success.port';
 
 export interface BuildUseCase {
   generate(
     path: string,
     value: TokenPrimitiveMapType,
     mode?: string | null,
-  ): Promise<SuccessCreateFilePort>;
+  ): Promise<BuildSuccessPort>;
 }

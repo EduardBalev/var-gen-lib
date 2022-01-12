@@ -1,5 +1,5 @@
 import { TokenMapEntity } from '../../entities/token-map.entity';
 
-export interface ConvertCommand {
+export interface ConvertStrategy {
   convert(value: TokenMapEntity): string;
 }

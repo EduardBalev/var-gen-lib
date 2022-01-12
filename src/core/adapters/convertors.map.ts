@@ -1,15 +1,15 @@
 import { ConvertorEntity } from '../../domains/entities/convertor.entity';
 import { ConvertorsMapPort } from '../../domains/ports/out/convertors-map.port';
-import { CssConvertorCommand } from '../convertors';
+import { CssConvertorStrategy } from '../convertors';
 
 export class ConvertorsMapAdapter implements ConvertorsMapPort {
   private _map: Map<string, ConvertorEntity> = new Map([
-    ['css', new CssConvertorCommand()],
-    ['scss', new CssConvertorCommand('scss')],
-    ['sass', new CssConvertorCommand('sass')],
+    ['css', new CssConvertorStrategy()],
+    ['scss', new CssConvertorStrategy('scss')],
+    ['sass', new CssConvertorStrategy('sass')],
   ]);
 
-  get(extension: string): ConvertorEntity | null {
+  public get(extension: string): ConvertorEntity | null {
     return this._map.get(extension) ?? null;
   }
 }

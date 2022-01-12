@@ -1,8 +1,8 @@
 import { TokenMapEntity } from '../../domains/entities/token-map.entity';
-import { ConvertCommand } from '../../domains/ports/in/convert.command';
+import { ConvertStrategy } from '../../domains/ports/in/convert.strategy';
 
 // TODO: refactor this convertor;
-export class CssConvertorCommand implements ConvertCommand {
+export class CssConvertorStrategy implements ConvertStrategy {
   private readonly ROOT_ELEMENT = 'html';
   private readonly NEW_LINE = '\n';
   private readonly TAB = '  ';
