@@ -1,0 +1,13 @@
+{
+  "test": "'TEST variable'",
+  "color": {
+    "black": "#000000",
+    "white": "#ffffff",
+    "grey": "#cccccc"
+  },
+  "bg-color": {
+    "black": "hsla(0, 0%, 0%, 0.15)",
+    "white": "hsla(0, 0%, 100%, 0.15)",
+    "grey": "hsla(0, 0%, 80%, 0.15)"
+  }
+}
