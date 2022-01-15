@@ -5,8 +5,8 @@ import { CssConvertorStrategy } from '../convertors';
 export class ConvertorsMapAdapter implements ConvertorsMapPort {
   private _map: Map<string, ConvertorEntity> = new Map([
     ['css', new CssConvertorStrategy()],
-    ['scss', new CssConvertorStrategy('scss')],
-    ['sass', new CssConvertorStrategy('sass')],
+    ['scss', new CssConvertorStrategy()],
+    ['sass', new CssConvertorStrategy()],
   ]);
 
   public get(extension: string): ConvertorEntity | null {

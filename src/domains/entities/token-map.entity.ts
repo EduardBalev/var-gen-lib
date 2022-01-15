@@ -12,28 +12,19 @@ export type TokenPrimitiveMapType = {
 export type TokenMapEntityEntryType = [string, TokenMatItemType][];
 
 export class TokenMapEntity {
-  private _map = new Map<string, TokenMatItemType>();
+  private _value: TokenPrimitiveMapType | null = null;
 
-  constructor(_value?: TokenPrimitiveMapType) {
-    if (_value) {
-      this.fromObj(_value);
+  constructor(__value?: TokenPrimitiveMapType) {
+    if (!!__value && (typeof __value !== 'object' || Array.isArray(__value))) {
+      throw new TypeError(
+        `expected an argument of type object, but got ${typeof __value}`,
+      );
     }
+
+    this._value = __value ?? {};
   }
 
-  public get map() {
-    return this._map;
-  }
-
-  public fromObj(value: TokenPrimitiveMapType) {
-    const entry = Object.entries(value);
-    entry.forEach(([k, _v]) => {
-      let v: TokenMatItemType;
-      if (typeof _v === 'object') {
-        v = new TokenMapEntity(_v);
-      } else {
-        v = _v;
-      }
-      this._map.set(k, v);
-    });
+  public get value(): TokenPrimitiveMapType {
+    return this._value ?? {};
   }
 }
